@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlm-poc
+  namespace: eas-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlm-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlm-poc
+      annotations:
+        cni.projectcalico.org/hwAddr: "02:3f:3c:e2:51:54"
+    spec:
+      containers:
+      - name: qchemlm
+        image: ghcr.io/dal203384/qchem-app:v1
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 32000
+        - containerPort: 32001
+        # --- ADDED: Volume Mount ---
+        volumeMounts:
+        - name: qchem-log-storage
+          mountPath: /usr/local/flexlm/logs
+      # --- ADDED: Volume Definition ---
+      volumes:
+      - name: qchem-log-storage
+        hostPath:
+          # Change this to your preferred path on the eask3sd01 server
+          path: /var/log/qchem-poc
+          type: DirectoryOrCreate
+      imagePullSecrets:
+      - name: github-auth

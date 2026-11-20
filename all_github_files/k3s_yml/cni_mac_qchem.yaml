@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlm-poc
+  namespace: eas-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlm-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlm-poc
+      annotations:
+        cni.projectcalico.org/hwAddr: "02:3f:3c:e2:51:54"   # your MAC stays
+    spec:
+      containers:
+      - name: qchemlm
+        image: ghcr.io/dal203384/qchem-app:v1
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 32000
+        - containerPort: 32001
+      imagePullSecrets:
+      - name: github-auth

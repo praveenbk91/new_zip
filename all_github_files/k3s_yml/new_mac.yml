@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mac-plain-test
+  namespace: eas-dev
+  labels:
+    app: mac-test
+spec:
+  initContainers:
+  - name: change-mac
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+    - |
+      ip link set eth0 down &&
+      ip link set eth0 address 02:42:AC:11:00:02 &&
+      ip link set eth0 up
+  containers:
+  - name: main-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlm-poc
+  namespace: eas-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlm-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlm-poc
+      annotations:
+        cni.projectcalico.org/hwAddr: "02:3f:3c:e2:51:54"
+    spec:
+      containers:
+      - name: qchemlm
+        image: oitglrepoprem.utdallas.edu:1050/dal203384/qchem-lm:latest
+        # --- ADDED: Loop Logic ---
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            # Give the main license manager 20 seconds to fully start 
+            # the vendor daemons before we start polling.
+            sleep 20
+            (
+            while true; do
+              echo "$(date): Polling License Status" >> /usr/local/flexlm/logs/qchem_lm.log
+              # Use the full path to lmutil inside your container
+              /opt/qchem/flexnet/bin/lmutil lmstat -a -c 32000@localhost >> /usr/local/flexlm/logs/qchem_lm.log
+              sleep 300
+            done
+            ) &
+
+            # Start the actual license manager entrypoint
+            # Note: Ensure this matches the original entrypoint of your image
+            sh ./docker-entrypoint.sh
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 32000
+        - containerPort: 32001
+        volumeMounts:
+        - name: qchem-log-storage
+          mountPath: /usr/local/flexlm/logs
+      volumes:
+      - name: qchem-log-storage
+        hostPath:
+          path: /var/log/qchem-poc
+          type: DirectoryOrCreate
+      imagePullSecrets:
+      - name: gitlab-auth

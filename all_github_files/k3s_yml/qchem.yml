@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlm-poc
+  namespace: eas-dev           # Changed namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlm-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlm-poc
+    spec:
+      containers:
+      - name: qchemlm
+        # Updated to your GitHub personal package
+        image: ghcr.io/dal203384/qchem-app:v1 
+        securityContext:
+          privileged: true     # Added for K3s environment requirements
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 32000
+        - containerPort: 32001
+      imagePullSecrets:
+      - name: github-auth      # Referencing the secret you created

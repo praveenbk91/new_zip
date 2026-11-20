@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlmlb-poc
+  namespace: eas-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlmlb-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlmlb-poc
+    spec:
+      containers:
+      - name: qchemlm
+        image: ghcr.io/dal203384/qchem-app:v1
+        securityContext:
+          privileged: true     # Required for manual MAC address/License tools
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 32000
+        - containerPort: 32001
+      imagePullSecrets:
+      - name: github-auth      # Ensure this secret exists in the 'eas-dev' namespace
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qchemlm-lb
+  namespace: eas-dev
+spec:
+  type: LoadBalancer
+  selector:
+    app: qchemlmlb-poc           # This links the Load Balancer to the Deployment above
+  ports:
+    - name: lmgrd
+      port: 32000              # Port exposed on your Server's IP
+      targetPort: 32000        # Port inside the container
+      protocol: TCP
+    - name: qchemlm
+      port: 32001              # Port exposed on your Server's IP
+      targetPort: 32001        # Port inside the container
+      protocol: TCP

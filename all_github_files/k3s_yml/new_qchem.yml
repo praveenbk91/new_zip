@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlm-poc
+  namespace: eas-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlm-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlm-poc
+    spec:
+      # This helper container runs first to set the MAC
+      initContainers:
+      - name: set-mac
+        image: busybox
+        command: ["/bin/sh", "-c", "ip link set dev eth0 down && ip link set dev eth0 address 02:3f:3c:e2:51:54 && ip link set dev eth0 up"]
+        securityContext:
+          privileged: true
+      containers:
+      - name: qchemlm
+        image: ghcr.io/dal203384/qchem-app:v1
+        securityContext:
+          privileged: true
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 27000
+        - containerPort: 27001
+      imagePullSecrets:
+      - name: github-auth

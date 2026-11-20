@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qchemlmlb-poc
+  namespace: eas-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qchemlmlb-poc
+  template:
+    metadata:
+      labels:
+        app: qchemlmlb-poc
+    spec:
+      # Step 1: Set the hardware MAC address before the app starts
+      initContainers:
+      - name: set-mac
+        image: busybox
+        command: ["/bin/sh", "-c", "ip link set dev eth0 down && ip link set dev eth0 address 02:3f:3c:e2:51:54 && ip link set dev eth0 up"]
+        securityContext:
+          privileged: true
+      
+      # Step 2: Run the actual QChem License Manager
+      containers:
+      - name: qchemlm
+        image: ghcr.io/dal203384/qchem-app:v1
+        securityContext:
+          privileged: true
+        env:
+        - name: HOSTID
+          value: "023f3ce25154"
+        ports:
+        - containerPort: 32000
+        - containerPort: 32001
+      
+      imagePullSecrets:
+      - name: github-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qchemlm-lb
+  namespace: eas-dev
+spec:
+  type: LoadBalancer
+  selector:
+    app: qchemlmlb-poc
+  ports:
+    - name: lmgrd
+      port: 32000              # Port users connect to
+      targetPort: 32000        # Port inside the container
+      protocol: TCP
+    - name: qchemlm
+      port: 32001              # Port users connect to
+      targetPort: 32001        # Port inside the container
+      protocol: TCP
