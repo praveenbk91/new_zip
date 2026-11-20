@@ -1,0 +1,33 @@
+---
+- name: Create Application Load Balancer
+  elb_application_lb:
+    name: "{{ load_balancer_name }}"
+    subnets: "{{ subnet_ids }}"
+    security_groups: "{{ security_group_ids | join(',') }}"
+    state: present
+    scheme: internet-facing
+    region: "{{ aws_region }}"
+  register: load_balancer
+
+- name: Set ALB DNS and Hosted Zone ID facts
+  set_fact:
+    alb_dns_name: "{{ load_balancer.dns_name }}"
+    alb_hosted_zone_id: "{{ load_balancer.canonical_hosted_zone_id }}"
+    load_balancer_arn: "{{ load_balancer.load_balancer_arn }}"
+
+- name: Debug the ALB DNS and Hosted Zone ID
+  debug:
+    msg: "ALB DNS Name: {{ alb_dns_name }}, ALB Hosted Zone ID: {{ alb_hosted_zone_id }}, Load Balancer ARN: {{load_balancer_arn}}"
+
+- name: Wait for ALB to be in active state before ECS service stabilization
+  command: >
+    aws elbv2 describe-load-balancers
+    --load-balancer-arns {{ load_balancer_arn }}
+    --region {{ aws_region }}
+  register: alb_status
+  until: >
+    (alb_status.stdout | from_json).LoadBalancers[0].State.Code == 'active'
+  retries: 30  # 5 minutes (1-3 minutes typical for ALB provisioning)
+  delay: 10
+  changed_when: false
+
