@@ -1,0 +1,3 @@
+---
+log_group_name: "logs/poc-ecsconfluencebuild"
+aws_region: "us-east-1"

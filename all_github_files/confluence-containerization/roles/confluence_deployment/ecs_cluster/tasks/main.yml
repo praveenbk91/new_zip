@@ -1,0 +1,40 @@
+---
+- name: Check if ECS Cluster already exists
+  command: >
+    aws ecs describe-clusters --clusters "{{ ecs_cluster_name }}" --region "{{ aws_region }}"
+    --query "clusters[?status=='ACTIVE'].clusterArn" --output json
+  register: ecs_cluster_check
+  ignore_errors: true
+  changed_when: false
+
+- name: Ensure ecs_cluster_arn is always defined
+  set_fact:
+    ecs_cluster_arn: "{{ (ecs_cluster_check.stdout | from_json)[0] | default('') }}"
+  when: ecs_cluster_check.stdout is defined and ecs_cluster_check.stdout != "[]"
+
+- name: Debug ECS Cluster Check
+  debug:
+    msg: "ECS Cluster '{{ ecs_cluster_name }}' already exists with ARN: {{ ecs_cluster_arn }}"
+  when: ecs_cluster_arn is defined and ecs_cluster_arn | length > 0
+
+- name: Create ECS Cluster (if it does not exist)
+  ecs_cluster:
+    name: "{{ ecs_cluster_name }}"
+    region: "{{ aws_region }}"
+    state: present
+  register: ecs_cluster_result
+  when: ecs_cluster_arn is not defined or ecs_cluster_arn | length == 0
+
+- name: Set ECS Cluster ARN fact (if created)
+  set_fact:
+    ecs_cluster_arn: "{{ ecs_cluster_result.cluster.clusterArn }}"
+  when: ecs_cluster_result.changed
+
+- name: Debug message if ECS cluster was created
+  debug:
+    msg: "ECS Cluster '{{ ecs_cluster_name }}' has been created successfully with ARN: {{ ecs_cluster_arn }}"
+  when: ecs_cluster_result.changed
+
+- name: Wait for ECS cluster to be available
+  pause:
+    seconds: 10

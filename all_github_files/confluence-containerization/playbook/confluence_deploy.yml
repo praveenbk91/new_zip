@@ -1,0 +1,16 @@
+---
+- name: Deploy Jira on AWS
+  hosts: localhost
+  gather_facts: no  # AWS tasks don't require local facts
+  collections:
+    - amazon.aws
+  roles:
+    - { role: ../roles/confluence_deployment/cloudwatch_logs}
+    - { role: ../roles/confluence_deployment/ecs_cluster}    
+    - { role: ../roles/confluence_deployment/efs}
+    - { role: ../roles/confluence_deployment/ec2_instances}
+    - { role: ../roles/confluence_deployment/load_balancer } 
+    - { role: ../roles/confluence_deployment/target_groups } 
+    - { role: ../roles/confluence_deployment/ecs_service}
+    #- { role: ../roles/confluence_deployment/route53}
+    #- { role: ../roles/confluence_deployment/rds}

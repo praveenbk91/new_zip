@@ -1,0 +1,18 @@
+---
+ecs_task_family: "confluence-taskdef-build"
+task_cpu: "2048"   #set cp
+task_memory: "6144" #set desired memory  
+container_name: "confluence-container-build" 
+ecr_image_uri: "976193262802.dkr.ecr.us-east-1.amazonaws.com/confluence-poc:8.5.21-test"
+efs_name: "confluence-efs"
+log_group_name: "logs/poc-ecsconfluencebuild" 
+aws_region: "us-east-1"
+ecs_cluster_name: "confluence-poc-cluster-build"
+ecs_service_name: "confluence-service-build"
+desired_task_count: 1  # Number of ECS tasks
+subnet_ids:
+  - "subnet-07e9bb7d782ee0d85"  # private subnet ID
+security_group_ids:
+  - "sg-0bf0f95816cae1fab"  # Replace with correct security group ID
+task_execution_role: "arn:aws:iam::976193262802:role/ecsTaskExecutionRole" #set role
+task_role: "arn:aws:iam::976193262802:role/ecsInstanceRole" #set role

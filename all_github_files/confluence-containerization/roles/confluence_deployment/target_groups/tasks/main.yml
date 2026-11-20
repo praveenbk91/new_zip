@@ -1,0 +1,34 @@
+- name: Create Target Group for ALB
+  elb_target_group:
+    name: "{{tg_name}}"
+    port: 8090
+    protocol: HTTP
+    vpc_id: "{{ vpc_id }}"
+    health_check_path: "/"
+    health_check_protocol: HTTP  # Add this line to specify the health check protocol
+    region: "{{ aws_region }}"
+    state: present
+  register: target_group
+
+- name: Set the Target Group ARN as a global fact
+  set_fact:
+    target_group_arn: "{{ target_group.target_group_arn }}"  # Store ARN globally
+
+- name: Output the Target Group ARN
+  debug:
+    msg: "The Target Group ARN is: {{ target_group_arn }}"
+
+- name: Create a listener for the load balancer to forward traffic to the target group
+  shell: >
+    /usr/local/bin/aws elbv2 create-listener 
+    --load-balancer-arn "{{ load_balancer_arn }}" 
+    --protocol HTTP 
+    --port 80 
+    --default-actions Type=forward,TargetGroupArn="{{ target_group_arn }}" 
+    --region "{{ aws_region }}"
+  register: listener_result
+  changed_when: "'Listeners' in listener_result.stdout"
+
+- name: Debug listener creation result
+  debug:
+    var: listener_result.stdout

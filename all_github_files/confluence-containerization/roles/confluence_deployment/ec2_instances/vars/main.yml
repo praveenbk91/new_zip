@@ -1,0 +1,13 @@
+---
+key_pair: "confluence-ansible" #set key pair use same key as jumphost
+instance_type: "t3.large"  # Adjust the EC2 instance type as per your requirements t3 medium
+ami_id: "ami-07bd539d6a69884fb"  #set ecs-optimized ami ubuntu latest is fine
+aws_region: "us-east-1"
+subnet_ids:
+  - "subnet-07e9bb7d782ee0d85"  # private subnet ID
+security_group_ids:
+  - "sg-029ff86e49e9bc66c"  # Replace with your test security group ID
+ec2_instance_role: "ecsInstanceRole" #set role same role as jump host
+ecs_instance_name: "confluence-poc-ec2-build"
+ecs_cluster_name: "confluence-poc-cluster-build"
+volume_size: 30

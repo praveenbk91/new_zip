@@ -1,0 +1,8 @@
+---
+efs_name: "confluence-efs"
+efs_performance_mode: "generalPurpose"
+efs_throughput_mode: "bursting"
+subnet_ids:
+  - "subnet-07e9bb7d782ee0d85"  # private subnet ID
+security_group_ids:
+  - "sg-0a6b5e8b547e24fcc"  # Replace with correct security group ID

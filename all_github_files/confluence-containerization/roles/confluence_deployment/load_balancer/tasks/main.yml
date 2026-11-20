@@ -1,0 +1,21 @@
+---
+- name: Create Application Load Balancer
+  elb_application_lb:
+    name: "{{ load_balancer_name }}"
+    subnets: "{{ subnet_ids }}"
+    security_groups: "{{ security_group_ids | join(',') }}"
+    state: present
+    scheme: internal
+    region: "{{ aws_region }}"
+  register: load_balancer
+
+- name: Set ALB DNS and Hosted Zone ID facts
+  set_fact:
+    alb_dns_name: "{{ load_balancer.dns_name }}"
+    alb_hosted_zone_id: "{{ load_balancer.canonical_hosted_zone_id }}"
+    load_balancer_arn: "{{ load_balancer.load_balancer_arn }}"
+
+- name: Debug the ALB DNS and Hosted Zone ID
+  debug:
+    msg: "ALB DNS Name: {{ alb_dns_name }}, ALB Hosted Zone ID: {{ alb_hosted_zone_id }}, Load Balancer ARN: {{load_balancer_arn}}"
+

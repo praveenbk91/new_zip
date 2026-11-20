@@ -1,0 +1,107 @@
+---
+- name: Check if the EFS file system exists
+  command: >
+    aws efs describe-file-systems --file-system-id {{ efs_id }} --region {{ aws_region }} --query "FileSystems[0].FileSystemId" --output text
+  register: efs_check
+  changed_when: false
+  ignore_errors: true  # Allow failure in case EFS doesn't exist
+
+- name: Fail if EFS does not exist
+  fail:
+    msg: "EFS {{ efs_id }} does not exist in {{ aws_region }}. Aborting EC2 instance creation."
+  when: "'None' in efs_check.stdout"
+
+- name: Check for existing ECS EC2 instances
+  ec2_instance_info:
+    region: "{{ aws_region }}"
+    filters:
+      "instance-state-name": ["pending", "running"]
+      "tag:Name": "{{ ecs_instance_name }}"
+  register: existing_instances
+
+- name: Debug existing instances
+  debug:
+    msg: "Existing ECS EC2 instances: {{ existing_instances.instances | length }} found."
+
+- name: Debug IAM instance profile
+  debug:
+    msg: "IAM Instance Profile: {{ ec2_instance_role }}"
+
+- name: Define user_data script for spot instance
+  set_fact:
+    user_data_script: |
+      #!/bin/bash
+      # Configure ECS agent
+      echo "ECS_CLUSTER={{ ecs_cluster_name }}" >> /etc/ecs/ecs.config
+      # Setup EFS mount
+      echo "{{ efs_mount_ip }} {{ efs_id }}.efs.{{ aws_region }}.amazonaws.com" >> /etc/hosts
+      modprobe io_net
+      # Mount EFS system for shared home
+      mkdir -p /mnt/efs/shared
+      echo "{{ efs_id }}.efs.{{ aws_region }}.amazonaws.com:/confluence-shared /mnt/efs/shared efs _netdev,noresvport,tls 0 0" >> /etc/fstab
+      # Mount EFS system for config
+      mkdir -p /mnt/efs/config
+      echo "{{ efs_id }}.efs.{{ aws_region }}.amazonaws.com:/confluence-config /mnt/efs/config efs _netdev,noresvport,tls 0 0" >> /etc/fstab
+      mount -a
+
+- name: Create a spot instance request for ECS Cluster (if none exist)
+  command: >
+    aws ec2 request-spot-instances
+    --region {{ aws_region }}
+    --instance-count 1
+    --type "persistent"
+    --instance-interruption-behavior "stop"
+    --launch-specification '{
+      "ImageId": "{{ ami_id }}",
+      "KeyName": "{{ key_pair }}",
+      "InstanceType": "{{ instance_type }}",
+      "IamInstanceProfile": {"Name": "{{ ec2_instance_role }}"},
+      "SubnetId": "{{ subnet_ids[0] }}",
+      "SecurityGroupIds": {{ security_group_ids | to_json }},
+      "BlockDeviceMappings": [
+        {
+          "DeviceName": "/dev/xvda",
+          "Ebs": {
+            "VolumeSize": {{ volume_size }},
+            "VolumeType": "gp3",
+            "Iops": 3000,
+            "Throughput": 125,
+            "DeleteOnTermination": true
+          }
+        }
+      ],
+      "UserData": "{{ user_data_script | b64encode }}"
+    }'
+  register: spot_request
+  when: existing_instances.instances | length == 0  # Only create if no running instance exists
+
+- name: Parse spot instance request ID
+  set_fact:
+    spot_request_id: "{{ spot_request.stdout | from_json | json_query('SpotInstanceRequests[0].SpotInstanceRequestId') }}"
+  when: existing_instances.instances | length == 0 and spot_request is success
+
+- name: Wait for spot instance request to be fulfilled
+  command: >
+    aws ec2 describe-spot-instance-requests
+    --region {{ aws_region }}
+    --spot-instance-request-ids {{ spot_request_id }}
+    --query "SpotInstanceRequests[0].InstanceId"
+    --output text
+  register: spot_instance_id
+  until: spot_instance_id.stdout != "None"
+  retries: 30
+  delay: 10
+  when: existing_instances.instances | length == 0 and spot_request_id is defined
+
+- name: Tag the spot instance
+  command: >
+    aws ec2 create-tags
+    --region {{ aws_region }}
+    --resources {{ spot_instance_id.stdout }}
+    --tags Key=Name,Value={{ ecs_instance_name }}
+  when: existing_instances.instances | length == 0 and spot_instance_id.stdout != "None"
+
+- name: Debug EC2 instance creation status
+  debug:
+    msg: "EC2 spot instance creation skipped because an instance already exists."
+  when: existing_instances.instances | length > 0

@@ -1,0 +1,3 @@
+---
+ecs_cluster_name: "confluence-poc-cluster-build"
+aws_region: "us-east-1"

@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo Installing Python dependencies...
+      - pip install --upgrade pip  # Upgrade pip as suggested
+      - pip install awscli
+      - pip install boto3  # Install boto3 and botocore
+      - echo Installing Ansible...
+      - pip install ansible-core==2.13.13  # Use a version compatible with Python 3.8
+      - ansible --version
+      - echo Installing amazon.aws collection...
+      - ansible-galaxy collection install amazon.aws:7.0.0 --force || echo "Failed to install amazon.aws collection"
+      - ansible-galaxy collection install community.aws
+      - ansible-galaxy collection install community.general
+      - echo Verifying installed collections...
+      - ansible-galaxy collection list | grep amazon.aws || echo "amazon.aws collection not found"
+  build:
+    commands:
+      - echo Running Ansible playbook with verbose output...
+      - ansible-playbook playbook/confluence_deploy.yml -i "localhost," -c local -e "ansible_python_interpreter=$(which python3)" -vvv || echo "Ansible playbook failed, see logs for details"
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
