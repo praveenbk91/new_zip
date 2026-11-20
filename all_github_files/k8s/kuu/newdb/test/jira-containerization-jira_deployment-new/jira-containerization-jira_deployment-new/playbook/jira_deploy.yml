@@ -1,0 +1,16 @@
+---
+- name: Deploy Jira on AWS
+  hosts: localhost
+  gather_facts: no  # AWS tasks don't require local facts
+  collections:
+    - amazon.aws
+  roles:
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/cloudwatch_logs}
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/ecs_cluster}    
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/efs}
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/ec2_instances}
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/load_balancer } 
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/target_groups } 
+    - { role: /home/ubuntu/jira-containerization-jira_deployment/jira-containerization-jira_deployment/roles/jira_deployment/ecs_service}
+    #- { role: ../roles/jira_deployment/route53}
+    #- { role: ../roles/jira_deployment/rds}

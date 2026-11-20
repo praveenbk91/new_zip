@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-shared-vol-pvc
+  namespace: conf-poc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-pv
+  volumeMode: Filesystem
+  volumeName: my-shared-vol-pv
+  resources:
+    requests:
+      storage: 1Gi
+

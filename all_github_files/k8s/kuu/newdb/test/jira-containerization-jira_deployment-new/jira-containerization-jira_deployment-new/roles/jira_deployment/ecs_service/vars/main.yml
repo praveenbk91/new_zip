@@ -1,0 +1,18 @@
+---
+ecs_task_family: "jira-taskdef-new-only"
+task_cpu: "2048"   #set cp
+task_memory: "4096" #set desired memory  
+container_name: "jira-container-new" 
+ecr_image_uri: "976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:v10.3"
+efs_name: "jira-efs-new"
+log_group_name: "logs/poc-ecsjira" 
+aws_region: "us-east-1"
+ecs_cluster_name: "jira-poc-cluster-new"
+ecs_service_name: "jira-service-new"
+desired_task_count: 1  # Number of ECS tasks
+subnet_ids:
+  - "subnet-09f3c80937dd7dfd9"  # private subnet ID
+security_group_ids:
+  - "sg-03fcf1cc5b5635edd"  # Replace with correct security group ID
+task_execution_role: "arn:aws:iam::976193262802:role/ecsTaskExecutionRole" #set role
+task_role: "arn:aws:iam::976193262802:role/ecsInstanceRole" #set role

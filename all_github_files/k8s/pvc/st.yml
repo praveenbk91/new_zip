@@ -1,0 +1,17 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-pv
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs  # Enables static mode for root or access point mounts
+mountOptions:
+  - tls
+  - iam
+  - rw
+  - lookupcache=pos
+  - noatime
+  - intr
+  - _netdev
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain

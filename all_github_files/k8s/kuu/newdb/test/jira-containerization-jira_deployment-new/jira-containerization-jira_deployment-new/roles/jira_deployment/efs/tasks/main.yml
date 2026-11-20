@@ -1,0 +1,86 @@
+---
+- name: Check if EFS already exists
+  command: >
+    /usr/local/bin/aws efs describe-file-systems
+    --query "FileSystems[?Tags[?Key=='Name' && Value=='{{ efs_name }}']].FileSystemId"
+    --region {{ aws_region }}
+  register: existing_efs
+  changed_when: false
+
+- name: Extract EFS ID if exists
+  set_fact:
+    efs_id: "{{ (existing_efs.stdout | from_json)[0] | default('') }}"
+
+- name: Create EFS File System if not exists
+  command: >
+    /usr/local/bin/aws efs create-file-system
+    --performance-mode {{ efs_performance_mode }}
+    --throughput-mode {{ efs_throughput_mode }}
+    --region {{ aws_region }}
+    --tags Key=Name,Value={{ efs_name }}
+  register: efs_result
+  when: efs_id == ''
+
+- name: Update EFS ID if a new one is created
+  set_fact:
+    efs_id: "{{ efs_result.stdout | from_json | json_query('FileSystemId') }}"
+  when: efs_id == ''
+
+- name: Wait for EFS file system to become available
+  command: >
+    /usr/local/bin/aws efs describe-file-systems --file-system-id "{{ efs_id }}"
+  register: efs_status
+  until: "'LifeCycleState' in efs_status.stdout and efs_status.stdout | from_json | json_query('FileSystems[0].LifeCycleState') == 'available'"
+  retries: 2
+  delay: 15
+  when: efs_id != ''
+
+- name: Apply Lifecycle Policy to EFS File System
+  command: >
+    /usr/local/bin/aws efs put-lifecycle-configuration
+    --file-system-id "{{ efs_id }}"
+    --lifecycle-policies '[{"TransitionToIA": "AFTER_7_DAYS"}]'
+  when: efs_id != ''
+
+- name: Check if EFS Mount Target already exists
+  command: >
+    /usr/local/bin/aws efs describe-mount-targets
+    --file-system-id {{ efs_id }}
+    --query "MountTargets[?SubnetId=='{{ subnet_ids[0] }}'].MountTargetId"
+    --region {{ aws_region }}
+  register: existing_mount_target
+  changed_when: false
+
+- name: Extract existing Mount Target ID (if any)
+  set_fact:
+    mount_target_id: "{{ (existing_mount_target.stdout | from_json)[0] | default('') }}"
+
+- name: Create EFS Mount Target if not exists
+  command: >
+    /usr/local/bin/aws efs create-mount-target
+    --file-system-id {{ efs_id }}
+    --subnet-id {{ subnet_ids[0] }}
+    --security-groups {{ security_group_ids | join(',') }}
+    --region {{ aws_region }}
+  when: mount_target_id == ''
+
+- name: Output EFS ID
+  debug:
+    msg: "The EFS ID for {{ efs_name }} is: {{ efs_id }}"
+
+- name: Set EFS ID for task definition
+  set_fact:
+    efs_id: "{{ efs_id if efs_id else (efs_result.stdout | from_json | json_query('FileSystemId')) }}"
+
+- name: Get EFS Mount Target IP
+  command: >
+    /usr/local/bin/aws efs describe-mount-targets
+    --file-system-id {{ efs_id }}
+    --query "MountTargets[0].IpAddress"
+    --region {{ aws_region }}
+  register: efs_ip
+  changed_when: false
+
+- name: Extract EFS IP
+  set_fact:
+    efs_mount_ip: "{{ efs_ip.stdout | from_json | default('') }}"

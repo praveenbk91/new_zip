@@ -1,0 +1,7 @@
+load_balancer_name: "jira-alb-new"    # set desired namee 
+aws_region: "us-east-1"
+subnet_ids:                       # add multiple subnets
+  - "subnet-09f3c80937dd7dfd9"              # public subnet-ID
+  - "subnet-0ebfcb4526479628e"              # public subnet-ID
+security_group_ids:
+  - "sg-05aae9d3d5d518282"

@@ -1,0 +1,19 @@
+---
+db_instance_id: "jira-db-instance"
+db_name: "jiradb"
+db_user: "jiraadmin"
+db_password: "Jira$pw@123"  # Replace with a secure value
+db_instance_class: "db.t3.small"
+db_engine: "oracle-se2"
+db_engine_version: "19.0.0.0.ru-2023-07.rur-2023-07.r1"
+db_storage: 10
+db_subnet_group: "jira-db-subnet-group1" # privte subnet group
+security_group_ids:
+  - "subnet-07e9bb7d782ee0d85"  # Replace with your test security group ID
+allocated_storage: 10 
+backup_retention_period: 7
+multi_az: no
+publicly_accessible: no
+storage_encrypted: yes
+db_port: 1521
+aws_region: "us-east-1"

@@ -1,0 +1,699 @@
+    1  sudo su
+    2  df -h
+    3  sudo apt-get update && sudo apt-get install -y ansible
+    4  ansible --version
+    5  ansible-galaxy collection install amazon.aws
+    6  ansible-galaxy collection install community.aws
+    7  sudo apt-get install -y python3-venv python3-pip
+    8  sudo su
+    9  ansible
+   10  pwd
+   11  mkdir jira
+   12  pwd
+   13  cd jira
+   14  ls
+   15  pwd
+   16  ls
+   17  cd jira-containerization/
+   18  ls
+   19  cd rolesq
+   20  cd orles
+   21  cd roles
+   22  ls
+   23  cd jira deployment
+   24  cd jira_deployment
+   25  ls
+   26  clear
+   27  sudo apt update
+   28  sudo apt install software-properties-common
+   29  sudo apt install ansible
+   30  ansible --version
+   31  ls
+   32  pwd
+   33  ls -a
+   34  ls
+   35  clear
+   36  ls
+   37  ls
+   38  cd jira
+   39  ls
+   40  cd jira-containerization/
+   41  ;s
+   42  ls
+   43  cd playbook/
+   44  ls
+   45  clear
+   46  ls
+   47  code .
+   48  clear
+   49  l
+   50  ansible
+   51  ansible --version
+   52  clear
+   53  sudo -i
+   54  sudo -i
+   55  ansible
+   56  clear
+   57  aws configure
+   58  aws ecs list-clusters
+   59  ls
+   60  cd jira
+   61  code .
+   62  aws
+   63  [200~aws iam create-access-key --user-name sxk240097
+   64  aws iam create-access-key --user-name sxk240097
+   65  ansible-galaxy collection install amazon.aws
+   66  pip install boto3 botocore
+   67  ansible-galaxy collection list
+   68  sudo -i
+   69  ansible --version
+   70  python3 --version
+   71  sudo apt install python3-pip -y
+   72  pip3 install --upgrade ansible six
+   73  pip install --upgrade ansible six --break-system-packages
+   74  ansible --version
+   75  sudo apt install python3-six -y
+   76  sudo apt update
+   77  sudo apt install python3-six -y
+   78  python3 -c "import six; print(six.__version__)"
+   79  python3 -c "import ansible.module_utils.six.moves"
+   80  pip3 install --force-reinstall six --break-system-packages
+   81  python3 -c "import six; print(six.__version__)"
+   82  ansible localhost -m setup | grep python
+   83  ls -l /usr/lib/python3/dist-packages/ansible/module_utils/six*
+   84  ansible --version
+   85  which aws
+   86  aws --version
+   87  aws ecs list-clusters --region us-east-1
+   88  aws --version
+   89  which aws
+   90  ls -l /usr/lib/python3/dist-packages/ansible/module_utils/six*
+   91  ansible --version
+   92  python3 --version
+   93  sudo apt-get update
+   94  sudo apt-get install python3-six
+   95  sudo pip3 install six
+   96  aws iam list-roles --query "Roles[*].{RoleName:RoleName,Arn:Arn}" --output table
+   97  [200~aws ecs list-task-definitions --query "taskDefinitionArns" --output table
+   98  aws ecs list-task-definitions --query "taskDefinitionArns" --output table
+   99  aws iam list-roles --query "Roles[*].{RoleName:RoleName,Arn:Arn}" --output table
+  100  [200~aws iam list-attached-role-policies --role-name ecsTaskExecutionRole
+  101  ~[200~aws iam list-attached-role-policies --role-name ecsTaskExecutionRole
+  102  aws iam list-attached-role-policies --role-name ecsTaskExecutionRole
+  103  docker pull atlassian/jira-software:latest
+  104  sudo apt update
+  105  sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+  106  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  107  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  108  sudo apt update
+  109  sudo apt install -y docker-ce docker-ce-cli containerd.io
+  110  docker --version
+  111  docker pull atlassian/jira-software:latest
+  112  sudo docker pull atlassian/jira-software:latest
+  113  docker images
+  114  sudo docker images
+  115  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 976193262802.dkr.ecr.us-east-1.amazonaws.com
+  116  sudo docker images
+  117  docker tag atlassian/jira-software 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  118  sudo docker tag atlassian/jira-software 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  119  docker push 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  120  sudo docker push 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  121  sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 976193262802.dkr.ecr.us-east-1.amazonaws.com
+  122  sudo docker push 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  123  sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 976193262802.dkr.ecr.us-east-1.amazonaws.com
+  124  sudo docker push 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  125  sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 976193262802.dkr.ecr.us-east-1.amazonaws.com
+  126  sudo docker push 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  127  ls
+  128  cd jira
+  129  aws
+  130  aws iam list-roles | grep ecsInstanceRole
+  131  [200~aws ssm get-parameters --names /aws/service/ecs/optimized-ami/amazon-linux-2023/recommended/image_id --region us-east-1 --query "Parameters[0].Value" --output text
+  132  ~aws ssm get-parameters --names /aws/service/ecs/optimized-ami/amazon-linux-2023/recommended/image_id --region us-east-1 --query "Parameters[0].Value" --output text
+  133  aws ssm get-parameters --names /aws/service/ecs/optimized-ami/amazon-linux-2023/recommended/image_id --region us-east-1 --query "Parameters[0].Value" --output text
+  134  sudo aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 976193262802.dkr.ecr.us-east-1.amazonaws.com
+  135  docker images
+  136  sudo docker images
+  137  sudo docker push 976193262802.dkr.ecr.us-east-1.amazonaws.com/jira-poc:latest
+  138  aws iam get-role --role-name ecsInstanceRole
+  139  sudo aws iam get-role --role-name ecsInstanceRole
+  140  aws iam get-instance-profile --instance-profile-name ecsInstanceProfile
+  141  aws iam list-instance-profiles
+  142  ls
+  143  ll
+  144  cd jira/
+  145  ls
+  146  cd jira-containerization/
+  147  ls
+  148  cd playbook/
+  149  ls
+  150  ll
+  151  ssh -i .abc ec2-user@10.231.17.11
+  152  ls
+  153  ssh -i jira/jira-containerization/playbook/.abc ec2-user@10.231.17.11
+  154  ssh -i jira/jira-containerization/playbook/.abc ec2-user@10.231.16.35
+  155  ssh -i jira/jira-containerization/playbook/.abc ec2-user@10.231.17.82
+  156  aws ecs list-container-instances --cluster jira-poc-cluster 
+  157  aws ec2 describe-instances --instance-ids i-0a4eecc713f068889 --query 'Reservations[*].Instances[*].IamInstanceProfile.Arn'
+  158  aws ecs list-container-instances --cluster jira-poc-cluster
+  159  aws ecs describe-container-instances --cluster jira-poc-cluster --container-instances arn:aws:ecs:us-east-1:976193262802:container-instance/jira-poc-cluster/5bbf7ccf6adb4e2caa59969a04392090
+  160  aws ecs describe-container-instances --cluster jira-poc-cluster --container-instances 5bbf7ccf6adb4e2caa59969a04392090
+  161  aws iam get-role --role-name ecsTaskExecutionRole
+  162  aws iam get-role --role-name ecsTaskRole
+  163  aws iam update-assume-role-policy --role-name ecsTaskExecutionRole --policy-document file://trust-policy.json
+  164  aws iam update-assume-role-policy --role-name ecsTaskRole --policy-document file://trust-policy.json
+  165  aws iam get-role --role-name ecsTaskRole
+  166  aws iam create-role --role-name ecsTaskExecutionRole     --assume-role-policy-document '{
+  167        "Version": "2012-10-17",
+  168        "Statement": [
+  169          {
+  170            "Effect": "Allow",
+  171            "Principal": {
+  172              "Service": "ecs-tasks.amazonaws.com"
+  173            },
+  174            "Action": "sts:AssumeRole"
+  175          }
+  176        ]
+  177      }'
+  178  aws iam list-attached-role-policies --role-name ecsInstanceRole
+  179  ssh -i jira/jira-containerization/playbook/.abc ec2-user@10.231.17.82
+  180  telnet fs-07205f13aefd25bd1.efs.us-east-1.amazonaws.com 2049
+  181  nslookup fs-07205f13aefd25bd1.efs.us-east-1.amazonaws.com
+  182  cat /etc/resolv.conf
+  183  aws ecs list-clusters --region <your-region>
+  184  aws ecs list-clusters --region us-east-1
+  185  l,s
+  186  ls
+  187  cd jira
+  188  ls
+  189  cd jira-containerization/
+  190  ls
+  191  cd playbook/
+  192  ls
+  193  cd ..
+  194  ls
+  195  ls inventory/
+  196  ls roles/
+  197  ls roles/jira_deployment/
+  198  ls
+  199  clear
+  200  ls -a
+  201  cd playbook/
+  202  ls
+  203  ls -a
+  204  ssh -i .abc ec2-user@10.231.17.82
+  205  ls
+  206  cd jira/
+  207  ls -a
+  208  cd ..
+  209  ls -a
+  210  cd jira/
+  211  ls
+  212  cd jira-containerization/
+  213  ls -a
+  214  cd playbook/
+  215  ls -a
+  216  ssh -i .abc ec2-user@10.231.17.82
+  217  aws ec2 describe-vpcs --vpc-ids vpc-012a767acecc80c90 --query 'Vpcs[0].{EnableDnsSupport:EnableDnsSupport, EnableDnsHostnames:EnableDnsHostnames}' 
+  218  aws ec2 modify-vpc-attribute --vpc-id vpc-012a767acecc80c90 --enable-dns-support "{\"Value\":true}"
+  219  aws ec2 modify-vpc-attribute --vpc-id vpc-012a767acecc80c90 --enable-dns-hostnames "{\"Value\":true}"
+  220  aws ec2 describe-vpc-attribute --vpc-id vpc-012a767acecc80c90 --attribute enableDnsSupport
+  221  aws ec2 describe-vpc-attribute --vpc-id vpc-012a767acecc80c90 --attribute enableDnsHostnames
+  222  aws efs describe-file-systems --query "FileSystems[*].{ID:FileSystemId,VPC:OwnerId}"
+  223  aws efs describe-mount-targets --file-system-id fs-07205f13aefd25bd1 --query "MountTargets[*].SubnetId"
+  224  aws ec2 describe-subnets --subnet-ids <SUBNET_ID_FROM_ABOVE> --query "Subnets[*].VpcId"
+  225  aws ec2 describe-subnets --subnet-ids subnet-07e9bb7d782ee0d85 --query "Subnets[*].VpcId"
+  226  ntu@ip-10-231-40-168:~$ aws ec2 describe-subnets --subnet-ids subnet-07e9bb7d782ee0d85 --query "Subnets[*].VpcId"
+  227  [
+  228  ]
+  229  aws efs describe-file-systems --query "FileSystems[*].{ID:FileSystemId,VPC:OwnerId}"
+  230  aws ecs describe-tasks --cluster jira-poc-cluster --tasks arn:aws:ecs:us-east-1:976193262802:task-definition/jira-taskdef:19
+  231  aws ecs list-tasks --cluster jira-poc-cluster 
+  232  aws ecs list-services --cluster jira-poc-cluster
+  233  aws ecs describe-services --cluster jira-poc-cluster --services jira-service
+  234  aws ecs describe-services --cluster jira-poc-cluster --services jira-service --query "services[0].{DesiredCount:desiredCount, RunningCount:runningCount, PendingCount:pendingCount}"
+  235  aws ecs list-tasks --cluster jira-poc-cluster --desired-status STOPPED
+  236  aws ecs describe-tasks --cluster jira-poc-cluster --tasks ff6c21a2b311408e83ff1010b919e41e
+  237  aws logs describe-log-groups --log-group-name-prefix "logs/ecsjira"
+  238  clear
+  239  aws iam list-attached-role-policies --role-name ecsTaskExecutionRole
+  240  aws iam list-role-policies --role-name ecsTaskExecutionRole
+  241  aws logs describe-log-groups --log-group-name-prefix logs/ecsjira
+  242  aws ec2 describe-instances --filters "Name=private-ip-address,Values=10.231.17.82" --query "Reservations[*].Instances[*].InstanceId"
+  243  aws ec2 stop-instances --instance-ids i-07c1b60c7be7115d1
+  244  aws ec2 modify-instance-attribute --instance-id i-07c1b60c7be7115d1 --instance-type t3.large
+  245  aws ec2 start-instances --instance-ids i-07c1b60c7be7115d1 
+  246  aws ec2 status --instance-ids i-07c1b60c7be7115d1 
+  247  aws ssm get-parameters --names /aws/service/ecs/optimized-ami/amazon-linux-2/recommended --query "Parameters[0].Value" --output text
+  248  ls
+  249  cd 
+  250  cd jira/
+  251  ls
+  252  cd jira-containerization/plaa
+  253  cd jira-containerization/playbook/
+  254  cat .abc
+  255  ls
+  256  ssh -i jira/jira-containerization/playbook/.abc ec2-user@10.231.17.82
+  257  ls
+  258  ls -a
+  259  ssh -i .abc ec2-user@10.231.17.11
+  260  cd jira/
+  261  cd jira-containerization/
+  262  cd playbook/
+  263  ssh -i .abc ec2-user@10.231.17.11
+  264  clear
+  265  ls
+  266  ls -a
+  267  ssh -i .abc ec2-user@10.231.16.73
+  268  nslookup fs-07205f13aefd25bd1.efs.us-east-1.amazonaws.com 169.254.169.253
+  269  aws ecs describe-tasks --cluster jira-poc-cluster --tasks arn:aws:ecs:us-east-1:976193262802:task/jira-poc-cluster/53799c7e24db48819159104f4352e79e --region us-east-1 
+  270  aws ecs describe-task-definition --task-definition jira-taskdef --region us-east-1 | jq '.taskDefinition.volumes'
+  271  aws ecs update-service --cluster jira-poc-cluster --service jira-service --force-new-deployment --region us-east-1 
+  272  aws iam get-instance-profile --instance-profile-name ecsInstanceRole
+  273  cd jira/
+  274  cd jira-containerization/
+  275  cd playbook/
+  276  ls -a
+  277  clear
+  278  ssh -i .abc ec2-user@10.231.16.73
+  279  aws iam list-attached-role-policies --role-name ecsTaskExecutionRole --region us-east-1
+  280  aws ecs describe-task-definition --task-definition jira-taskdef --region us-east-1 | jq '.taskDefinition'
+  281  clear
+  282  cd jira/jira-containerization/playbook/
+  283  ssh -i .abc ec2-user@10.231.16.73
+  284  cd jira/
+  285  cd jira-containerization/
+  286  cd playbook/
+  287  ssh -i .abc ec2-user@10.231.16.73
+  288  ls
+  289  clear
+  290  ls
+  291  rm -rf jira/
+  292  clear
+  293  kubectl get nodes
+  294  sudo snap install kubectl
+  295  sudo snap install kubectl --classic
+  296  kubectl
+  297  clear
+  298  kubectl get nodes
+  299  aws eks update-kubeconfig --region us-east-1 --name poc-cluster --kubeconfig ~/.kube/config
+  300  cat /home/ubuntu/.kube/config
+  301  kubectl get nodes
+  302  clear
+  303  kubectl get pods -all
+  304  kubectl get pods -n kube-system
+  305  aws eks describe-addon --cluster-name poc-cluster --addon-name vpc-cni
+  306  aws eks describe-addon-versions --addon-name vpc-cni --kubernetes-version 1.33
+  307  kubectl get pods -n kube-system
+  308  clear
+  309  kubectl get nodes
+  310  history
+  311  cat ~/.kube/config 
+  312  aws eks update-kubeconfig --region us-east-1 --name poc-cluster --kubeconfig ~/.kube/config
+  313  kubectl get nodes
+  314  clear
+  315  ls
+  316  kubectl get nodes
+  317  history
+  318  aws eks update-kubeconfig --region us-east-1 --name poc-cluster --kubeconfig ~/.kube/config
+  319  history
+  320  kubectl get nodes
+  321  clear
+  322  aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
+  323  aws iam list
+  324  aws iam list-open-id-connect-providers
+  325  cat >aws-load-balancer-controller-service-account.yaml <<EOF
+  326  apiVersion: v1
+  327  kind: ServiceAccount
+  328  metadata:
+  329    labels:
+  330      app.kubernetes.io/component: controller
+  331      app.kubernetes.io/name: aws-load-balancer-controller
+  332    name: aws-load-balancer-controller
+  333    namespace: kube-system
+  334    annotations:
+  335      eks.amazonaws.com/role-arn: arn:aws:iam::976193262802:role/AmazonEKSLoadBalancerControllerRole2
+  336  EOF
+  337  cat aws-load-balancer-controller-service-account.yaml 
+  338  kubectl apply -f aws-load-balancer-controller-service-account.yaml
+  339  kubectl get deployment -n kube-system aws-load-balancer-controller
+  340  kubectl get all -n kube-system
+  341  kubectl get sa 
+  342  kubectl get serviceaccount -n kube-system
+  343  ls
+  344  cat aws-load-balancer-controller-service-account.yaml 
+  345  kubecto apply -f v2_11_0_full.yaml 
+  346  kubectl apply -f v2_11_0_full.yaml 
+  347  kubectl apply -f v2_11_0_ingclass.yaml 
+  348  kubectl get all -n kube-system
+  349  kubectl logs pod/aws-load-balancer-controller-576955db58-jn6kx -n kube-system
+  350  kubectl pod pod/aws-load-balancer-controller-576955db58-jn6kx -n kube-system
+  351  kubectl describe pod pod/aws-load-balancer-controller-576955db58-jn6kx -n kube-system
+  352  kubectl get  pod pod/aws-load-balancer-controller-576955db58-jn6kx -n kube-system
+  353  kubectl get pod/aws-load-balancer-controller-576955db58-jn6kx -n kube-system
+  354  kubectl describe pod/aws-load-balancer-controller-576955db58-jn6kx
+  355  kubectl get events -n kube-system
+  356  clear
+  357  kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.19.0/cert-manager.yaml
+  358  kubectl apply -f v2_11_0_full.yaml 
+  359  kubectl wait --for=condition=available deployment/cert-manager -n cert-manager --timeout=300s
+  360  kubectl wait --for=condition=available deployment/cert-manager-cainjector -n cert-manager --timeout=300s
+  361  kubectl wait --for=condition=available deployment/cert-manager-webhook -n cert-manager --timeout=300s
+  362  kubectl get all -n kube-system
+  363  kubectl get events -n kube-system
+  364  clear
+  365  ls
+  366  kubectl get certificate,issuer -n kube-system -l app.kubernetes.io/instance=aws-load-balancer-controller
+  367  clear
+  368  kubectl get all -n kube-system
+  369  kubectl get pods -n cert-manager
+  370  kubectl get certificate -n kube-system aws-load-balancer-serving-cert
+  371  kubectl apply -f v2_11_0_full.yaml
+  372  kubectl get all -n kube-system
+  373  kubect get events -n kube-system
+  374  kubectl get events -n kube-system
+  375  kubectl get svc -n cert-manager cert-manager-webhook -oyaml
+  376  kubectl get endpoints -n cert-manager cert-manager-webhook
+  377  kubectl get events -n cert-manager --sort-by='.lastTimestamp' | grep -i webhook
+  378  kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.19.0/cert-manager.yaml
+  379  clear
+  380  ls
+  381  kubectl patch mutatingwebhookconfiguration aws-load-balancer-webhook --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Ignore"}]'
+  382  kubectl patch validatingwebhookconfiguration aws-load-balancer-webhook --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Ignore"}]'
+  383  kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.19.0/cert-manager.yaml
+  384  kubectl get svc -n cert-manager cert-manager-webhook
+  385  kubectl apply -f v2_11_0_full.yaml
+  386  kubectl get certificate,issuer -n kube-system -l app.kubernetes.io/instance=aws-load-balancer-controller -w
+  387  kubectl get all -n kube-system
+  388  kubectl logs deployment.apps/aws-load-balancer-controller -n kube-system
+  389  kubectl get endpoints -n cert-manager cert-manager-webhook
+  390  kubectl get events -n kube-system
+  391  clear
+  392  kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller -w
+  393  kubectl patch mutatingwebhookconfiguration aws-load-balancer-webhook --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Fail"}]'
+  394  kubectl patch validatingwebhookconfiguration aws-load-balancer-webhook --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Fail"}]'
+  395  kubectl logs -n kube-system deployment/aws-load-balancer-controller --tail=50
+  396  clear
+  397  ls
+  398  kubectl create deployment nginx --image=nginx --replicas=2
+  399  kubectl expose deployment nginx --port=80 --target-port=80 --type=ClusterIP --name=nginx-service
+  400  cat test-ingress.yml
+  401  vi test-ingress.yml
+  402  cat test-ingress.yml 
+  403  kubectl apply -f test-ingress.yaml
+  404  kubectl apply -f test-ingress.yml
+  405  kubectl get ingress test-alb-ingress -w
+  406  clear
+  407  kubectl get ingress test-alb-ingress -w
+  408  kubectl apply -f v2_11_0_ingclass.yaml
+  409  kubectl delete ingress test-alb-ingress
+  410  kubectl apply -f test-ingress.yaml  # Or re-run the YAML apply from before
+  411  kubectl apply -f test-ingress.yml  # Or re-run the YAML apply from before
+  412  kubectl get ingress test-alb-ingress -w
+  413  cat test-ingress.yml 
+  414  kubectl delete ingress test-alb-ingress
+  415  vi test-ingress.yml
+  416  vi test-ingress-new.yml.yml
+  417  vi test-ingress-new.yml
+  418  kubectl apply -f test-ingress.yml
+  419  kubectl delete ingress test-alb-ingress
+  420  kubectl apply -f test-ingress-new.yml
+  421  kubectl get ingress test-alb-ingress -w
+  422  clear
+  423  kubectl get ingress test-alb-ingress -w
+  424  kubectl describe ingress test-alb-ingress
+  425  vi test-ingress-new.yml 
+  426  kubectl delete ingress test-alb-ingress
+  427  kubectl apply -f test-ingress-new.yml
+  428  kubectl get ingress test-alb-ingress -w
+  429  kubectl describe ingress test-alb-ingress
+  430  clear
+  431  aws eks describe-cluster --name poc-cluster --query 'cluster.resourcesVpcConfig.subnetIds' --output text  # Lists all subnet IDs
+  432  aws ec2 describe-subnets --subnet-ids subnet-07e9bb7d782ee0d85 subnet-0d88863f447def082 --query 'Subnets[*].[SubnetId,AvailabilityZone,MapPublicIpOnLaunch,Tags[?Key==`Name`].Value|[0]]' --output table
+  433  kubectl delete ingress test-alb-ingress
+  434  kubectl apply -f test-ingress-new.yml
+  435  kubectl describe ingress test-alb-ingress
+  436  kubectl get ingress test-alb-ingress -w
+  437  curl l internal-k8s-default-testalbi-6c1b168eaf-1091938102.us-east-1.elb.amazonaws.com
+  438  clear
+  439  kubectl delete ingress test-alb-ingress
+  440  kubectl get all -n default
+  441  kubectl delete deployment nginx
+  442  kubectl get all -n default
+  443  kubectl delete svc nginx-service
+  444  kubectl get all -n default
+  445  clear
+  446  eksctl utils describe-addon-versions --kubernetes-version 1.33 | grep AddonName
+  447  # Set architecture (amd64 for Intel/AMD, arm64 for ARM)
+  448  ARCH=amd64  # Change to arm64 if needed
+  449  PLATFORM=$(uname -s)_$ARCH
+  450  # Download the latest release
+  451  curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+  452  # (Optional) Verify checksum
+  453  curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+  454  # Extract and install
+  455  tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+  456  sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
+  457  eksctl version
+  458  eksctl utils describe-addon-versions --kubernetes-version 1.33 | grep AddonName
+  459  eksctl utils describe-addon-versions --kubernetes-version 1.33 | grep AddonName --region us-east-1
+  460  eksctl utils describe-addon-versions --kubernetes-version 1.33 --region us-east-1 | grep AddonName
+  461  eksctl utils describe-addon-versions --kubernetes-version 1.33 --name aws-efs-csi-driver | grep AddonVersion
+  462  eksctl utils describe-addon-versions --kubernetes-version 1.33 --name aws-efs-csi-driver --region us-east-1 | grep AddonVersion
+  463  eksctl create addon --cluster my-cluster --name aws-efs-csi-driver --version latest     --service-account-role-arn arn:aws:iam::976193262802:role/AmazonEKS_EFS_CSI_DriverRole2  --force
+  464  eksctl create addon --cluster my-cluster --name aws-efs-csi-driver --version latest     --service-account-role-arn arn:aws:iam::976193262802:role/AmazonEKS_EFS_CSI_DriverRole2  --force --region us-east-1
+  465  eksctl create addon --cluster poc-cluster --name aws-efs-csi-driver --version latest     --service-account-role-arn arn:aws:iam::976193262802:role/AmazonEKS_EFS_CSI_DriverRole2  --force --region us-east-1
+  466  kubectl get all -n kube-system
+  467  clear
+  468  helm repo add atlassian-data-center  https://atlassian.github.io/data-center-helm-charts
+  469  sudo snap install helm
+  470  sudo snap install helm --classic
+  471  helm repo add atlassian-data-center  https://atlassian.github.io/data-center-helm-charts
+  472  kubectl create secret generic dbcreds --from-literal=username=oitconfluenceapp --from-literal=password=vnV8_deC_82x_5Qe
+  473  kubectl delete secrt dbcreds
+  474  kubectl delete secret dbcreds
+  475  kubectl create ns conf-poc
+  476  kubectl create secret generic dbcreds --from-literal=username=oitconfluenceapp --from-literal=password=vnV8_deC_82x_5Qe -n conf-poc
+  477  clear
+  478  kubectl create secret generic conflic   --from-literal=AAABpw0ODAoPeNptUl1v2jAUffevsLSXTVNaJ0DKkCyNJmaghUCXhFaIFxNuSkYI1HbCwq+f84G2S
+  479  pX8Yp9z7z3nXH8KC8BzXmFiY9Mc9fojs4cdN8QWsQbIEcBVespdroDWLwbR5wG5IGORnmuIOqc8y
+  480  QrIY8CfNY9jB3IF4gs2CSE4kiDkZoRdKCE7nUHgEMQRe2kMuQQ056km51xXsz/nVFS3SbZBTMP6h
+  481  vziuAWxSJo+tG6JutqP+VkLrjS7FmehoNj+06pEAYiVPCsaWzThmRaxEK88T2X7FIXY5VnGJYq1s
+  482  Tseq7SEtlA7VfrOtOiMnlJVcvm9ULuGfQe74jZ8yuWezp2LM2FJ9HbvrQ/J9XKdRkN3sp6VX7dR8
+  483  Ps4Hu+fdtabvB+kZbU9XCc/nweObzuwvsB6etnQDW0FdG7D6gw+PwJ12Yp5iyX71cKB4kKn3Tnpy
+  484  DOXejM3YL7hWcTuD+1hHwUgShAaGY8XzBj4L57xYi+fDPa4+tG2qpfX7q61e4DqFqNpE/JAhr2ei
+  485  ZaFiPdcwn9fogm+C6fR+FE2Wg19r+gvl4XRpTAsAhQUtDO8gC5gZ03NJd8Ajx53lGc3ogIUcNybO
+  486  Ws7bFbl5tjFXo0/8hmIpA4=X02kc   -n conf-poc
+  487  kubectl create secret generic conflic --from-literal=token=AAABpw0ODAoPeNptUl1v2jAUffevsLSXTVNaJ0DKkCyNJmaghUCXhFaIFxNuSkYI1HbCwq+f84G2S
+  488  pX8Yp9z7z3nXH8KC8BzXmFiY9Mc9fojs4cdN8QWsQbIEcBVespdroDWLwbR5wG5IGORnmuIOqc8y
+  489  QrIY8CfNY9jB3IF4gs2CSE4kiDkZoRdKCE7nUHgEMQRe2kMuQQ056km51xXsz/nVFS3SbZBTMP6h
+  490  vziuAWxSJo+tG6JutqP+VkLrjS7FmehoNj+06pEAYiVPCsaWzThmRaxEK88T2X7FIXY5VnGJYq1s
+  491  Tseq7SEtlA7VfrOtOiMnlJVcvm9ULuGfQe74jZ8yuWezp2LM2FJ9HbvrQ/J9XKdRkN3sp6VX7dR8
+  492  Ps4Hu+fdtabvB+kZbU9XCc/nweObzuwvsB6etnQDW0FdG7D6gw+PwJ12Yp5iyX71cKB4kKn3Tnpy
+  493  DOXejM3YL7hWcTuD+1hHwUgShAaGY8XzBj4L57xYi+fDPa4+tG2qpfX7q61e4DqFqNpE/JAhr2ei
+  494  ZaFiPdcwn9fogm+C6fR+FE2Wg19r+gvl4XRpTAsAhQUtDO8gC5gZ03NJd8Ajx53lGc3ogIUcNybO
+  495  Ws7bFbl5tjFXo0/8hmIpA4=X02kc -n conf-poc
+  496  kubectl get secret conflic -o yaml -n conf-poc
+  497  kubectl create secret generic conflic --from-literal=token='AAABpw0ODAoPeNptUl1v2jAUffevsLSXTVNaJ0DKkCyNJmaghUCXhFaIFxNuSkYI1HbCwq+f84G2SpX8Yp9z7z3nXH8KC8BzXmFiY9Mc9fojs4cdN8QWsQbIEcBVespdroDWLwbR5wG5IGORnmuIOqc8yQrIY8CfNY9jB3IF4gs2CSE4kiDkZoRdKCE7nUHgEMQRe2kMuQQ056km51xXsz/nVFS3SbZBTMP6hvziuAWxSJo+tG6JutqP+VkLrjS7FmehoNj+06pEAYiVPCsaWzThmRaxEK88T2X7FIXY5VnGJYq1sTseq7SEtlA7VfrOtOiMnlJVcvm9ULuGfQe74jZ8yuWezp2LM2FJ9HbvrQ/J9XKdRkN3sp6VX7dR8Ps4Hu+fdtabvB+kZbU9XCc/nweObzuwvsB6etnQDW0FdG7D6gw+PwJ12Yp5iyX71cKB4kKn3TnpyDOXejM3YL7hWcTuD+1hHwUgShAaGY8XzBj4L57xYi+fDPa4+tG2qpfX7q61e4DqFqNpE/JAhr2eiZaFiPdcwn9fogm+C6fR+FE2Wg19r+gvl4XRpTAsAhQUtDO8gC5gZ03NJd8Ajx53lGc3ogIUcNybOWs7bFbl5tjFXo0/8hmIpA4=X02kc' -n conf-poc
+  498  kubectl get secret conflic -o yaml -n conf-poc
+  499  clear
+  500  kubectl get csidriver
+  501  kubectl get storageclass
+  502  vi sto.yml
+  503  kubectl apply -f sto.yml 
+  504  vi efs-pv.yml
+  505  kubectl apply -f efs-pv.yml 
+  506  vi efs-pvc.yml
+  507  kubectl apply -f efs-pvc.yml 
+  508  helm
+  509  clear
+  510  cat v
+  511  cat values.yml 
+  512  clear
+  513  helm install conf-test atlassian-data-center/confluence --namespace conf-poc
+  514  kubectl get all -n conf-poc
+  515  kubectl events -n conf-poc
+  516  kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-efs-csi-driver
+  517  kubectl logs -n kube-system deployment/efs-csi-controller -c efs-plugin
+  518  kubectl get all -n conf-poc
+  519  kubectl events -n conf-poc
+  520  helm uninstall conf-test
+  521  helm list
+  522  kubectl get all -n conf-poc
+  523  helm uninstall conf-test atlassian-data-center/confluence --namespace conf-poc
+  524  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  525  kubectl get all -n conf-poc 
+  526  kubectl events -n conf-poc
+  527  exit
+  528  clear
+  529  ls
+  530  history
+  531  eksctl create addon --cluster my-cluster --name aws-efs-csi-driver --version latest     --service-account-role-arn arn:aws:iam::976193262802:role/AmazonEKS_EFS_CSI_DriverRole2  --force --region us-east-1
+  532  aws eks update-kubeconfig --region us-east-1 --name poc-cluster --kubeconfig ~/.kube/config
+  533  kubectl get all -n kube-system
+  534  kubectl logs pod/efs-csi-node-26jg9 -n kube-system
+  535  kubectl logs pod/efs-csi-controller-b99cfcc86-8hhdt -n kube-system
+  536  clear
+  537  ls
+  538  cd /mnt/efs
+  539  ls
+  540  mkdir -p /mnt/efs
+  541  sudo mkdir -p /mnt/efs
+  542  sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-06c8bc2cfa809fb46.efs.us-east-1.amazonaws.com:/ /mnt/efs
+  543  sudo apt update && sudo apt install nfs-common -y
+  544  sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-06c8bc2cfa809fb46.efs.us-east-1.amazonaws.com:/ /mnt/efs
+  545  clear
+  546  sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-06c8bc2cfa809fb46.efs.us-east-1.amazonaws.com:/ /mnt/efs
+  547  cat /etc/hosts
+  548  echo "10.231.17.180 fs-06c8bc2cfa809fb46.efs.us-east-1.amazonaws.com" >> /etc/hosts
+  549  sudo echo "10.231.17.180 fs-06c8bc2cfa809fb46.efs.us-east-1.amazonaws.com" >> /etc/hosts
+  550  sudo -i
+  551  sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-06c8bc2cfa809fb46.efs.us-east-1.amazonaws.com:/ /mnt/efs
+  552  clear
+  553  history
+  554  kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.19.0/cert-manager.yaml
+  555  kubectl apply -f v2_11_0_full.yaml
+  556  kubectl apply -f v2_11_0_ingclass.yaml
+  557  kubectl get all -n kube-system
+  558  history
+  559  clear
+  560  history
+  561  kubectl apply -f aws-load-balancer-controller-service-account.yaml
+  562  kubectl get all -n kube-system
+  563  ls
+  564  kubectl delete deployment deployment.apps/aws-load-balancer-controller
+  565  kubectl delete deployment aws-load-balancer-controller
+  566  kubectl delete deployment aws-load-balancer-controller -n kube-system
+  567  kubectl apply -f v2_11_0_full.yaml 
+  568  kubectl get all -n kube-system
+  569  clear
+  570  ls
+  571  kubectl create ns conf-poc
+  572  kubect get storageclass
+  573  kubectl get storageclass
+  574  cat sto.yml 
+  575  mkdir pvc
+  576  cd pvc
+  577  vi st.yml
+  578  kubectl apply -f st.yml 
+  579  vi pv.yml
+  580  kubectl apply -f pv.yml 
+  581  vi pvc.yml
+  582  kubectl apply -f pvc.yml -n conf-poc
+  583  kubectl get storageclass
+  584  cd ..
+  585  ls
+  586  cat values.yml 
+  587  history
+  588  kubectl create secret generic conflic --from-literal=token='AAABpw0ODAoPeNptUl1v2jAUffevsLSXTVNaJ0DKkCyNJmaghUCXhFaIFxNuSkYI1HbCwq+f84G2SpX8Yp9z7z3nXH8KC8BzXmFiY9Mc9fojs4cdN8QWsQbIEcBVespdroDWLwbR5wG5IGORnmuIOqc8yQrIY8CfNY9jB3IF4gs2CSE4kiDkZoRdKCE7nUHgEMQRe2kMuQQ056km51xXsz/nVFS3SbZBTMP6hvziuAWxSJo+tG6JutqP+VkLrjS7FmehoNj+06pEAYiVPCsaWzThmRaxEK88T2X7FIXY5VnGJYq1sTseq7SEtlA7VfrOtOiMnlJVcvm9ULuGfQe74jZ8yuWezp2LM2FJ9HbvrQ/J9XKdRkN3sp6VX7dR8Ps4Hu+fdtabvB+kZbU9XCc/nweObzuwvsB6etnQDW0FdG7D6gw+PwJ12Yp5iyX71cKB4kKn3TnpyDOXejM3YL7hWcTuD+1hHwUgShAaGY8XzBj4L57xYi+fDPa4+tG2qpfX7q61e4DqFqNpE/JAhr2eiZaFiPdcwn9fogm+C6fR+FE2Wg19r+gvl4XRpTAsAhQUtDO8gC5gZ03NJd8Ajx53lGc3ogIUcNybOWs7bFbl5tjFXo0/8hmIpA4=X02kc' -n conf-poc
+  589  kubectl create secret generic dbcreds --from-literal=username=oitconfluenceapp --from-literal=password=vnV8_deC_82x_5Qe -n conf-poc
+  590  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  591  kubectl get all -n conf-poc
+  592  kubectl logs pod/conf-test-confluence-0 -n conf-poc
+  593  kubectl get all -n conf-poc
+  594  kubectl events -n conf-poc
+  595  ls
+  596  cd pvc
+  597  ls
+  598  cat st.yml 
+  599  cat pv.yml 
+  600  vi pv.yml
+  601  kubect delete pvc my-sharec-vol-pvc -n conf-poc
+  602  kubectl delete pvc my-sharec-vol-pvc -n conf-poc
+  603  kubectl get pvc -n conf-poc
+  604  kubectl delete pvc my-shared-vol-pvc -n conf-poc
+  605  kubectl delete pvc my-shared-vol-pv
+  606  kubectl delete pv my-shared-vol-pv
+  607  kubect apply -f pv.yml 
+  608  kubectl apply -f pv.ym
+  609  kubectl apply -f pvc.yml 
+  610  cd ..
+  611  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  612  kubectl get all -n conf-poc
+  613  kubectl events -n conf-poc
+  614  kubectl get all -n conf-poc
+  615  kubectl delete pvc my-shared-vol-pvc
+  616  kubect get pv
+  617  kubectl get pv
+  618  cd pvc/
+  619  ls
+  620  kubectl apply -f pvc.yml -n conf-poc
+  621  cd ..
+  622  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  623  kubectl get all -n conf-poc
+  624  kubectl events -n conf-poc
+  625  ls
+  626  kubectl get pvc -n conf-poc
+  627  kubectl get pv
+  628  kubectl get pvc
+  629  kubectl delete pvc -n conf-poc
+  630  kubectl delete pvc my-share-vol-pvc -n conf-poc
+  631  cd pvc
+  632  ls
+  633  cat pv.yml 
+  634  cat pvc.yml 
+  635  kubectl get pvc -n conf-poc
+  636  cd ..
+  637  history
+  638  helm uninstall conf-test atlassian-data-center/confluence --namespace conf-poc
+  639  clear
+  640  kubectl get nodes
+  641  kubectl get all -n kube-system
+  642  ls
+  643  kubectl get pvc
+  644  kubectl get pvc -n conf-poc
+  645  kubectl get pv
+  646  kubectl delete pvc -n conf-poc
+  647  kubectl delete pvc my-shared-vol-pvc -n conf-poc
+  648  kubectl delete pv my-shared-vol-pv
+  649  cd pvc/
+  650  ls
+  651  kubectl apply -f pv.yml
+  652  kubectl apply -f pvc.yml -n conf-poc
+  653  kubectl get pv
+  654  cd ..
+  655  history
+  656  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  657  kubectl get all -n conf-poc
+  658  kubectl events -n conf-poc
+  659  history
+  660  helm uninstall conf-test atlassian-data-center/confluence --namespace conf-poc
+  661  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  662  kubectl events -n conf-poc
+  663  kubectl get all -n conf-poc
+  664  clear
+  665  aws efs describe-mount-targets --file-system-id fs-06c8bc2cfa809fb46 --query 'MountTargets[?IpAddress==`10.231.17.180`].[IpAddress,SubnetId,AvailabilityZone]' --output table
+  666  kubectl get all -n conf-poc
+  667  kubectl events -n conf-poc
+  668  clear
+  669  ls
+  670  cd pvc
+  671  ls
+  672  cat pvc.yml 
+  673  cat pv.yml 
+  674  vi pv.yml 
+  675  cat pv.yml 
+  676  kubectl delete pvc my-shared-vol-pvc -n conf-poc
+  677  kubectl delete pvc my-shared-vol-pv
+  678  kubectl delete pv my-shared-vol-pv
+  679  kubectl apply -f pv.yml 
+  680  kubectl apply -f pvc.yml 
+  681  cd ..
+  682  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  683  kubectl get all -n conf-poc
+  684  cd pvc/
+  685  kubectl delete pvc my-shared-vol-pvc -n conf-poc
+  686  kubectl delete pv my-shared-vol-pv
+  687  kubectl get pv
+  688  vi pv.yml 
+  689  vi pvc.yml 
+  690  kubectl apply -f pv.yml 
+  691  kubectl apply -f pvc.yml -n conf-poc
+  692  kubect get pv
+  693  kubectl get pv
+  694  cd ..
+  695  helm install conf-test atlassian-data-center/confluence --namespace conf-poc --values values.yml
+  696  kubectl get all -n conf-poc
+  697  kubectl events -n conf-poc
+  698  history
+  699  history > commands.txt

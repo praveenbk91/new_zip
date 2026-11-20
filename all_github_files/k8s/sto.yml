@@ -1,0 +1,19 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-pv
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: "{}"
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-0e583d7268b3f831e
+  accessPointId: fsap-0316bc226108c14c3
+  directoryPerms: "0755"
+  basePath: "/confluence-shared"
+mountOptions:
+  - tls
+  - iam
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+

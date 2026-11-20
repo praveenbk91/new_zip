@@ -1,0 +1,12 @@
+---
+key_pair: "jira-ansible" #set key pair use same key as jumphost
+instance_type: "t3.large"  # Adjust the EC2 instance type as per your requirements t3 medium
+ami_id: "ami-07bd539d6a69884fb"  #set ecs-optimized ami ubuntu latest is fine
+aws_region: "us-east-1"
+subnet_ids:
+  - "subnet-09f3c80937dd7dfd9"  # private subnet ID
+security_group_ids:
+  - "sg-01799b833096ad1f0"  # Replace with your test security group ID
+ec2_instance_role: "ecsInstanceRole" #set role same role as jump host
+ecs_instance_name: "jira-poc-ec2-new"
+ecs_cluster_name: "jira-poc-cluster-new"

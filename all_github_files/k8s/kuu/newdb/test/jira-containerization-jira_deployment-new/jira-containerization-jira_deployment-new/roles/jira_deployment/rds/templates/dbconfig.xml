@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jira-configuration>
+    <database>
+        <url>jdbc:oracle:thin:@{{ rds_endpoint }}:{{ db_port }}/{{ db_name }}</url>
+        <driver-class>oracle.jdbc.OracleDriver</driver-class>
+        <username>{{ db_user }}</username>
+        <password>{{ db_password }}</password>
+        <minimum-socket-timeout>30000</minimum-socket-timeout>
+        <validation-query>SELECT 1 FROM DUAL</validation-query>
+    </database>
+</jira-configuration>

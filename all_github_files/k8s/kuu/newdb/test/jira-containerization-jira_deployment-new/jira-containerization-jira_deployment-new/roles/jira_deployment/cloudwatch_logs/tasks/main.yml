@@ -1,0 +1,13 @@
+---
+- name: Ensure CloudWatch Log Group Exists
+  cloudwatchlogs_log_group:
+    log_group_name: "{{ log_group_name }}"
+    state: present
+    retention: 7
+    region: "{{ aws_region }}"
+  register: log_group_result  # Capture the result of the task
+
+- name: Debug message if log group was created
+  debug:
+    msg: "CloudWatch Log Group '{{ log_group_name }}' has been created with retention of 7 days."
+  when: log_group_result.changed  # Only run this if the log group was created (not already existing)

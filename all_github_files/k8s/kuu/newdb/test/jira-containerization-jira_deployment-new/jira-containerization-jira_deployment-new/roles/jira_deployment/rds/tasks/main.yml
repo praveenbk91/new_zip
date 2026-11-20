@@ -1,0 +1,33 @@
+---
+- name: Create RDS instance for Jira (Oracle)
+  rds_instance:
+    state: present
+    db_instance_identifier: "{{ db_instance_id }}"
+    engine: "{{ db_engine }}"
+    engine_version: "{{ db_engine_version }}"
+    db_instance_class: "{{ db_instance_class }}"  # Set to db.t3.micro for cheaper costs
+    master_username: "{{ db_user }}"
+    master_user_password: "{{ db_password }}"
+    allocated_storage: "{{ allocated_storage }}"  # Default to 10 GB for testing
+    db_name: "{{ db_name }}"
+    vpc_security_group_ids: "{{ security_group_ids }}"
+    db_subnet_group_name: "{{ db_subnet_group }}"
+    publicly_accessible: "{{ publicly_accessible }}"
+    multi_az: "{{ multi_az }}"  # Set to false for testing, avoid multi-AZ for cost
+    storage_encrypted: "{{ storage_encrypted }}"
+    backup_retention_period: "{{ backup_retention_period }}"  # 7 days retention for testing
+    license_model: "license-included"  # Use License Included option for Oracle
+    region: "{{ aws_region }}"
+    tags:
+      Name: "Jira-RDS"
+      Environment: "Production"
+  register: rds_output
+
+- name: Display RDS endpoint
+  debug:
+    msg: "RDS Endpoint: {{ rds_output.endpoint.address }}"
+
+# - name: Configure Jira to connect to RDS database
+#   template:
+#     src: "templates/dbconfig.xml.j2"  
+#     dest: "/var/atlassian/application-data/jira/dbconfig.xml"

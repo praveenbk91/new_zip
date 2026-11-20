@@ -1,0 +1,7 @@
+tg_name: "jira-targetgroup-new" #set desired name
+aws_region: "us-east-1" 
+vpc_id: "vpc-01fded889521b039c"  # Replace with correct VPC ID
+# subnet_ids:
+#   - "subnet-xxxxxx"  # Replace with your test subnet ID
+# security_group_ids:
+#   - "sg-xxxxx"  # Replace with your test security group ID

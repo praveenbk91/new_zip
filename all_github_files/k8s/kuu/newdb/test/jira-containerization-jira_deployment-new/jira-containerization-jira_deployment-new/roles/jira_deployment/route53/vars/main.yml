@@ -1,0 +1,3 @@
+aws_region: "us-east-1"  # Change to your desired AWS region
+route53_zone_id: "Z3A123EXAMPLE"  # Replace with your actual Route 53 hosted zone ID
+domain_name: "jira.yourdomain.com"  # Replace with the domain you want to use
