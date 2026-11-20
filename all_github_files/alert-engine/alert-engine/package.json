@@ -1,0 +1,19 @@
+{
+  "name": "alert-detection",
+  "version": "1.1.7",
+  "description": "Alert detection module for WatchdogEX",
+  "main": "alertStateMachine.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.2.2"
+  },
+  "scripts": {
+    "test": "mocha --require ./test/setup.cjs"
+  },
+  "keywords": [],
+  "author": "Avidity Science",
+  "license": "ISC"
+}

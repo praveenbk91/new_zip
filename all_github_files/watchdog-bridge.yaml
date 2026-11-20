@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchdog-bridge
+  namespace: eas-dev
+  labels:
+    app: watchdog-bridge
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: watchdog-bridge
+  template:
+    metadata:
+      labels:
+        app: watchdog-bridge
+    spec:
+      hostNetwork: true
+      containers:
+        - name: watchdog-bridge
+          image: amazoncorretto:11
+          workingDir: /app
+          command: ["java", "-jar", "/app/watchdog-bridge.jar"]
+          volumeMounts:
+            - name: bridge-data
+              mountPath: /app
+              readOnly: false
+      volumes:
+        - name: bridge-data
+          hostPath:
+            path: /opt/watchdog
+            type: Directory

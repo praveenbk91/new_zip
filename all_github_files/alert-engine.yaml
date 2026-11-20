@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alert-engine
+  namespace: eas-dev
+  labels:
+    app: alert-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alert-engine
+  template:
+    metadata:
+      labels:
+        app: alert-engine
+    spec:
+      hostNetwork: true
+      containers:
+        - name: alert-engine
+          image: "docker.io/library/watchdog-alert-engine:v1"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: alert-data
+              mountPath: /app/WDEX/alertengine/data
+      volumes:
+        - name: alert-data
+          hostPath:
+            path: /var/lib/k3s/watchdog/alert-data
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alert-engine
+  namespace: eas-dev
+spec:
+  type: ClusterIP
+  selector:
+    app: alert-engine
+  ports:
+    - port: 5000
+      targetPort: 5000
