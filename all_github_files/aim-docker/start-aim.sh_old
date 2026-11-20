@@ -1,0 +1,9 @@
+#!/bin/bash
+# Substitute DB_USER and DB_PASSWORD from environment variables
+sed -i "s|\${DB_USER}|${DB_USER}|" /home/aim141test/conf/Catalina/bootstrap.xml
+sed -i "s|\${DB_PASSWORD}|${DB_PASSWORD}|" /home/aim141test/conf/Catalina/bootstrap.xml
+sed -i "s|\${DB_USER}|${DB_USER}|" /home/aim141test/conf/Catalina/localhost/reportviewer.xml
+sed -i "s|\${DB_PASSWORD}|${DB_PASSWORD}|" /home/aim141test/conf/Catalina/localhost/reportviewer.xml
+
+# Start Tomcat
+exec /home/aim141test/bin/catalina.sh run
